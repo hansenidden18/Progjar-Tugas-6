@@ -114,7 +114,7 @@ class ChatClient:
     def send_realm_message(self, realmid, username_to, message):
         if (self.tokenid==""):
             return "Error, not authorized"
-        string="sendrealm {} {} {} {}\r\n" . format(self.tokenid, realmid, username_to, message)
+        string="sendrealm {} {} {} \r\n" . format(self.tokenid, realmid, username_to, message)
         result = self.sendstring(string)
         if result['status']=='OK':
             return "Message sent to realm {}".format(realmid)
@@ -124,22 +124,22 @@ class ChatClient:
     def send_group_message(self,usernames_to="xxx",message="xxx"):
         if (self.tokenid==""):
             return "Error, not authorized"
-        string="sendgroup {} {} {} \r\n" . format(self.tokenid,usernames_to,message)
+        string="sendgroup {} {} {} \r\n" . format(self.tokenid,usernamesto,message)
         print(string)
         result = self.sendstring(string)
         if result['status']=='OK':
-            return "message sent to {}" . format(usernames_to)
+            return "message sent to {}" . format(usernamesto)
         else:
             return "Error, {}" . format(result['message'])
 
-    def send_group_realm_message(self, realmid, usernames_to, message):
+    def send_group_realm_message(self, realmid, usernamesto, message):
         if self.tokenid=="":
             return "Error, not authorized"
-        string="sendgrouprealm {} {} {} {} \r\n" . format(self.tokenid, realmid, usernames_to, message)
+        string="sendgrouprealm {} {} {} {} \r\n" . format(self.tokenid, realmid, ','.join(usernamesto), message)
         print(string)
         result = self.sendstring(string)
         if result['status']=='OK':
-            return "message sent to group {} in realm {}" .format(usernames_to, realmid)
+            return "message sent to group {} in realm {}" .format(usernamesto, realmid)
         else:
             return "Error {}".format(result['message'])
 
