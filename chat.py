@@ -24,7 +24,7 @@ class RealmThread(threading.Thread):
                 data = self.sock.recv(64)
                 print("diterima dari server",data)
                 if (data):
-                    receivemsg = "{}{}" . format(receivemsg,data.decode())  #data harus didecode agar dapat di operasikan dalam bentuk string
+                    receivemsg = "{}{}" . format(receivemsg,data.decode())
                     if receivemsg[-4:]=='\r\n\r\n':
                         print("end of string")
                         return json.loads(receivemsg)
